@@ -2,9 +2,9 @@
 
 // Buyer-app PAYMENT experience. ONDC settles out-of-band, so this BAP tracks a
 // PENDING → PAID payment record and shows the buyer how to pay:
-//   - GET  /api/payments/status        — live PENDING/PAID
-//   - GET  /api/payments/instructions  — UPI / bank / reference / amount / QR
-//   - POST /api/payments/create        — idempotently (re)open the record (retry)
+//   - GET  /api/shop-payments/status        — live PENDING/PAID
+//   - GET  /api/shop-payments/instructions  — UPI / bank / reference / amount / QR
+//   - POST /api/shop-payments/create        — idempotently (re)open the record (retry)
 // COD vs prepaid is offered only when the seller's on_init terms advertise an
 // on-fulfilment payment (parsePaymentTerms). The buyer cannot self-mark PAID —
 // settlement is reconciled out-of-band; we poll status until it flips.

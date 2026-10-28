@@ -13,7 +13,7 @@
 //   * Cookie oi_admin_session=<HMAC>            — the browser console
 //
 // The cookie value is HMAC-SHA256("oi-admin-session-v1", key=ADMIN_TOKEN), set
-// by POST /api/admin/login. Deterministic + stateless: verifiable on any
+// by POST /api/ondc-admin/login. Deterministic + stateless: verifiable on any
 // serverless instance without a session store, and a leaked cookie never
 // reveals the token itself. Rotating ADMIN_TOKEN invalidates every session.
 //
@@ -38,7 +38,7 @@ export function isAdminConfigured(): boolean {
   return getAdminToken().length > 0;
 }
 
-// The value POST /api/admin/login sets as the session cookie.
+// The value POST /api/ondc-admin/login sets as the session cookie.
 export function adminSessionValue(): string {
   return createHmac("sha256", getAdminToken())
     .update(SESSION_PAYLOAD)

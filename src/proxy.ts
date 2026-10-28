@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Apex/root hosts that serve the marketing site.
-const ROOT_DOMAINS = [
-  "openidea.co.in",
-  "openidea.world",
-  "localhost",
-  "vercel.app",
-];
+// Apex/root hosts whose subdomains are tenant sites. openidea.world is not
+// here: the whole domain redirects to openidea.co.in at the Vercel edge.
+const ROOT_DOMAINS = ["openidea.co.in", "localhost"];
+
+// Hosts that never carry a tenant. *.vercel.app is this project's own
+// deployment URL, which is also what openidea.co.in (served by the Ecosyz
+// project) forwards /shop, /ondc and friends to — treating the deployment
+// name as a tenant subdomain would rewrite every forwarded request to /s/.
+function isPlatformHost(hostname: string) {
+  return hostname === "vercel.app" || hostname.endsWith(".vercel.app");
+}
 
 // Subdomains that should NOT be treated as tenant sites.
 const RESERVED_SUBDOMAINS = new Set([
@@ -28,6 +32,8 @@ export function extractSubdomain(host: string | null): string | null {
   if (!host) return null;
   const hostname = host.split(":")[0].toLowerCase();
 
+  if (isPlatformHost(hostname)) return null;
+
   const stripped = hostname.startsWith("www.") ? hostname.slice(4) : hostname;
   if (CUSTOM_DOMAINS[stripped]) return CUSTOM_DOMAINS[stripped];
 
@@ -47,12 +53,12 @@ export function extractSubdomain(host: string | null): string | null {
 
 // Per-tenant admin paths that must stay reachable on custom domains
 // (e.g. saiwalldecor.com/sai-admin) instead of being rewritten to the
-// tenant site. The global /admin is intentionally excluded — it manages
+// tenant site. The global /ondc-admin is intentionally excluded — it manages
 // every tenant and should only be reachable on the apex host.
 const TENANT_ADMIN_PATHS = new Set(["/sai-admin"]);
 
 function isTenantAdminPath(pathname: string) {
-  if (pathname === "/admin/login") return true;
+  if (pathname === "/ondc-admin/login") return true;
   for (const p of TENANT_ADMIN_PATHS) {
     if (pathname === p || pathname.startsWith(p + "/")) return true;
   }
@@ -75,6 +81,8 @@ export function proxy(req: NextRequest) {
 // (/index.html, /style.css, /app.js, /logo.png) reach proxy and get rewritten
 // to /s/<sub>/<path>. On the apex host, proxy returns next() and Next still
 // serves files from public/ normally — just with one extra function call.
+// /wt-assets is this app's assetPrefix (next.config.ts) — its bundles must
+// not be rewritten into a tenant folder either.
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico).*)"],
+  matcher: ["/((?!_next|wt-assets|api|favicon.ico).*)"],
 };

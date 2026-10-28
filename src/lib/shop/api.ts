@@ -347,7 +347,7 @@ export function createPayment(body: {
   orderId?: string;
   amount?: number;
 }): Promise<{ transactionId: string; paymentReference: string; status: string }> {
-  return postJSON("/api/payments/create", body);
+  return postJSON("/api/shop-payments/create", body);
 }
 
 export function paymentInstructions(transactionId: string): Promise<{
@@ -361,7 +361,7 @@ export function paymentInstructions(transactionId: string): Promise<{
   qrCodeUrl?: string;
 }> {
   return getJSON(
-    `/api/payments/instructions?transactionId=${encodeURIComponent(transactionId)}`
+    `/api/shop-payments/instructions?transactionId=${encodeURIComponent(transactionId)}`
   );
 }
 
@@ -372,6 +372,6 @@ export function paymentStatus(transactionId: string): Promise<{
   amount?: number;
 }> {
   return getJSON(
-    `/api/payments/status?transactionId=${encodeURIComponent(transactionId)}`
+    `/api/shop-payments/status?transactionId=${encodeURIComponent(transactionId)}`
   );
 }

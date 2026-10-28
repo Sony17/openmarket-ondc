@@ -1,11 +1,11 @@
 // Payment list — powers the admin reconcile console.
 //
-//   GET /api/payments/list?status=PENDING|PAID   (status optional → all)
+//   GET /api/shop-payments/list?status=PENDING|PAID   (status optional → all)
 //     → { payments: PaymentRecord[] }  (newest first)
 //
 // Reads through the payment store DISPATCHER, so on production (DATABASE_URL set)
 // it returns the COMPLETE, shared list from Postgres — not a per-instance /tmp
-// slice. Marking a payment paid is the existing POST /api/payments/reconcile.
+// slice. Marking a payment paid is the existing POST /api/shop-payments/reconcile.
 //
 // NOTE: ungated, matching the app's existing admin-API posture (the console page
 // itself is guarded client-side by the admin login). Demo-grade — see the admin

@@ -1,6 +1,6 @@
 // Payment reconcile endpoint — settle a payment quoted by its reference.
 //
-// Same out-of-band reconciliation step as /api/payments/verify, but keyed by
+// Same out-of-band reconciliation step as /api/shop-payments/verify, but keyed by
 // paymentReference instead of transactionId — because that is what a bank
 // statement / settlement line carries (the buyer was told to quote the
 // reference, not the internal transaction id). This route resolves the
@@ -8,7 +8,7 @@
 // (updatePaymentStatus) — it does NOT introduce a second settlement path, so
 // write-once verifiedAt and all idempotency semantics carry over unchanged.
 //
-//   POST /api/payments/reconcile
+//   POST /api/shop-payments/reconcile
 //   {
 //     "paymentReference": "PAY-ABC123...",  // REQUIRED — what the bank line quotes
 //     "status":           "PAID",           // REQUIRED — "PENDING" | "PAID"

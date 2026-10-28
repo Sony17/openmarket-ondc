@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Footer from "@/components/Footer";
 
 /* -------------------------------------------------------------------------
@@ -305,9 +304,11 @@ export default function StaticTermsPage() {
                 Network · {SITE} · Version v{VERSION} · Effective {EFFECTIVE_DATE}.
               </p>
               <p className="mt-4 text-sm">
-                <Link href="/" className="text-blue-700 underline-offset-2 hover:underline">
+                {/* "/" is the Ecosyz app on openidea.co.in — needs a full page load. */}
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                <a href="/" className="text-blue-700 underline-offset-2 hover:underline">
                   Back to {SITE}
-                </Link>
+                </a>
               </p>
             </Section>
           </article>

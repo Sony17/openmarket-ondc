@@ -193,7 +193,7 @@ export default function OndcAdminPage() {
       /* ignore */
     }
     if (!ok) {
-      router.replace("/admin/login?next=/shop/admin");
+      router.replace("/ondc-admin/login?next=/shop/admin");
       return;
     }
     setAuthed(true);
@@ -205,7 +205,7 @@ export default function OndcAdminPage() {
     try {
       const [sRes, pRes, lRes] = await Promise.all([
         fetch("/api/shop/admin/summary", { cache: "no-store" }),
-        fetch("/api/payments/list", { cache: "no-store" }),
+        fetch("/api/shop-payments/list", { cache: "no-store" }),
         fetch("/api/logistics/shipments?limit=200", { cache: "no-store" }),
       ]);
       // Session cookie expired or absent: the data APIs are gated server-side
@@ -217,7 +217,7 @@ export default function OndcAdminPage() {
         } catch {
           // ignore storage errors
         }
-        router.replace("/admin/login?next=/shop/admin");
+        router.replace("/ondc-admin/login?next=/shop/admin");
         return;
       }
       const s = (await sRes.json()) as Summary & { error?: string };
@@ -300,7 +300,7 @@ export default function OndcAdminPage() {
       ) ?? undefined;
     setBusyRef(p.paymentReference);
     try {
-      const res = await fetch("/api/payments/reconcile", {
+      const res = await fetch("/api/shop-payments/reconcile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -361,8 +361,8 @@ export default function OndcAdminPage() {
     }
     // Clear the server-side session cookie too (best-effort; the redirect
     // must not wait on it).
-    void fetch("/api/admin/login", { method: "DELETE" }).catch(() => {});
-    router.replace("/admin/login");
+    void fetch("/api/ondc-admin/login", { method: "DELETE" }).catch(() => {});
+    router.replace("/ondc-admin/login");
   };
 
   if (authed === null) return <main className="min-h-screen bg-zinc-950" />;

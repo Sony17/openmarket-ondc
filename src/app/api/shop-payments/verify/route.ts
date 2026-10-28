@@ -6,7 +6,7 @@
 // this route — it only records the outcome the caller already knows, along with
 // the bank reference for the audit trail.
 //
-//   POST /api/payments/verify
+//   POST /api/shop-payments/verify
 //   {
 //     "transactionId": "uuid",     // REQUIRED — the payment to reconcile
 //     "status":        "PAID",     // REQUIRED — "PENDING" | "PAID"
