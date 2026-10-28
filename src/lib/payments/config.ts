@@ -2,10 +2,10 @@
 //
 // ONDC settles out-of-band, and this BAP collects on-order by directing the
 // buyer to pay into Ecosysz's own bank account / UPI. These destination details
-// are surfaced by GET /api/payments/instructions alongside the per-payment
+// are surfaced by GET /api/shop-payments/instructions alongside the per-payment
 // reference + amount from the store. Manual settlement — no gateway, no UPI SDK,
 // no generated QR; the buyer pays manually and it's later reconciled via
-// /api/payments/reconcile.
+// /api/shop-payments/reconcile.
 //
 // Read from environment variables (NOT hard-coded) so the real account number /
 // UPI never live in this PUBLIC repo. Set these in Vercel → Settings →

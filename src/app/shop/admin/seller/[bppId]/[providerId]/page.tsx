@@ -74,7 +74,7 @@ export default function AdminSellerDetailPage() {
     }
     if (!ok) {
       router.replace(
-        `/admin/login?next=/shop/admin/seller/${encodeURIComponent(
+        `/ondc-admin/login?next=/shop/admin/seller/${encodeURIComponent(
           bppId
         )}/${encodeURIComponent(providerId)}`
       );

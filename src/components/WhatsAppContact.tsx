@@ -29,8 +29,8 @@ export default function WhatsAppContact() {
   // Hide on tenant sites (/s/*), preview pages, and admin pages.
   const hidden =
     pathname.startsWith("/s/") ||
-    pathname.startsWith("/preview") ||
-    pathname.startsWith("/admin");
+    pathname.startsWith("/templates/") ||
+    pathname.startsWith("/ondc-admin");
 
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");

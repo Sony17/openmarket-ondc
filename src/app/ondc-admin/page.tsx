@@ -76,7 +76,7 @@ export default function AdminDashboard() {
       // ignore
     }
     if (!authed) {
-      router.replace("/admin/login");
+      router.replace("/ondc-admin/login");
       return;
     }
     refresh().then(() => setReady(true));
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
     } catch {
       // ignore
     }
-    router.push("/admin/login");
+    router.push("/ondc-admin/login");
   }
 
   if (!ready) {

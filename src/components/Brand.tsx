@@ -32,6 +32,15 @@ export default function Brand({
   );
 
   if (!href) return inner;
+  // "/" belongs to the Ecosyz app on openidea.co.in, so it needs a full page
+  // load; links inside this app keep client-side navigation.
+  if (href === "/") {
+    return (
+      <a href={href} aria-label="Open Idea EcoSyz">
+        {inner}
+      </a>
+    );
+  }
   return (
     <Link href={href} aria-label="Open Idea EcoSyz">
       {inner}

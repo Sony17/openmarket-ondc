@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Brand from "@/components/Brand";
 
 // Only allow `next` redirects to known internal admin paths, so a malicious
 // link can't bounce the user to an external URL after login.
-const ALLOWED_NEXT = new Set(["/admin", "/sai-admin", "/shop/admin"]);
+const ALLOWED_NEXT = new Set(["/ondc-admin", "/sai-admin", "/shop/admin"]);
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -26,7 +25,7 @@ export default function AdminLoginPage() {
     // localStorage flag remains ONLY as a client-side UX hint for the
     // console's route guard — it grants nothing server-side.
     try {
-      const res = await fetch("/api/admin/login", {
+      const res = await fetch("/api/ondc-admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
@@ -38,7 +37,7 @@ export default function AdminLoginPage() {
           // ignore storage errors
         }
         const nextParam = searchParams?.get("next");
-        const target = nextParam && ALLOWED_NEXT.has(nextParam) ? nextParam : "/admin";
+        const target = nextParam && ALLOWED_NEXT.has(nextParam) ? nextParam : "/ondc-admin";
         router.push(target);
         return;
       }
@@ -99,9 +98,11 @@ export default function AdminLoginPage() {
         </form>
 
         <p className="mt-6 text-center text-xs text-zinc-500">
-          <Link href="/" className="hover:text-zinc-300">
+          {/* "/" is the Ecosyz app on openidea.co.in — needs a full page load. */}
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/" className="hover:text-zinc-300">
             ← Back to site
-          </Link>
+          </a>
         </p>
       </div>
     </main>

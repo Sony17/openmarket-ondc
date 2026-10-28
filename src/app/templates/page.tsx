@@ -84,7 +84,7 @@ export default function TemplatesPage() {
                 className="group relative flex flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <Link
-                  href={`/preview/${t.slug}`}
+                  href={`/templates/${t.slug}`}
                   aria-label={`Preview ${meta.brandName} live`}
                   className="relative block aspect-[16/10] w-full overflow-hidden"
                   style={{ background: t.gradient }}

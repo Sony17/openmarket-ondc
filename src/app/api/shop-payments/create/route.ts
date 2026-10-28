@@ -5,7 +5,7 @@
 // paid" and hand back a stable reference the buyer (and a later bank
 // reconciliation) can quote. No funds move, no PSP is called.
 //
-//   POST /api/payments/create
+//   POST /api/shop-payments/create
 //   {
 //     "transactionId": "uuid",   // REQUIRED — the ONDC transaction this pays for
 //     "orderId":       "O123",   // optional — BPP order id, once on_confirm has one

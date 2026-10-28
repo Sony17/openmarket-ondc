@@ -5,7 +5,7 @@
 // transaction paid yet, and what's the bank reference." A miss is a 404 — the
 // payment was never created via /create — not an empty 200.
 //
-//   GET /api/payments/status?transactionId=<id>
+//   GET /api/shop-payments/status?transactionId=<id>
 //
 // Mirrors the conventions of the other routes: `NextResponse`,
 // `runtime = "nodejs"`, a 400 guard on the required input.

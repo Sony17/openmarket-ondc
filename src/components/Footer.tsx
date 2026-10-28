@@ -33,9 +33,11 @@ export default function Footer() {
 
         <div className="mt-6 flex flex-col items-center justify-between gap-2 border-t border-zinc-100 pt-4 text-xs text-zinc-500 sm:flex-row">
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-zinc-700">Privacy</Link>
-            <Link href="/terms" className="hover:text-zinc-700">Terms</Link>
-            <Link href="/cookies" className="hover:text-zinc-700">Cookies</Link>
+            {/* Served by the Ecosyz app on the same domain — plain <a> so the
+                browser does a full navigation instead of a client-side one. */}
+            <a href="/privacy" className="hover:text-zinc-700">Privacy</a>
+            <a href="/terms" className="hover:text-zinc-700">Terms</a>
+            <a href="/cookies" className="hover:text-zinc-700">Cookies</a>
             <Link href="/legal/static-terms" className="hover:text-zinc-700">ONDC Terms</Link>
             <a href="tel:+918130296940" className="hover:text-zinc-700">+91 81302 96940</a>
           </div>

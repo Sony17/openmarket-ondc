@@ -4,9 +4,9 @@
 // amount, from the payment store) with the static Ecosysz collection-account
 // details (from src/lib/payments/config.ts). The buyer pays manually into that
 // account quoting the reference; the payment is reconciled later via
-// /api/payments/reconcile. No gateway, no UPI SDK, no QR generation here.
+// /api/shop-payments/reconcile. No gateway, no UPI SDK, no QR generation here.
 //
-//   GET /api/payments/instructions?transactionId=<id>
+//   GET /api/shop-payments/instructions?transactionId=<id>
 //
 // ⚠️ The bank/UPI fields come straight from PAYMENT_CONFIG — ONLY ECOSYSZ BANK
 // ACCOUNT VALUES REMAIN TO BE FILLED. Until they are, those fields are blank but
