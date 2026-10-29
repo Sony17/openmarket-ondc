@@ -15,6 +15,8 @@ function isPlatformHost(hostname: string) {
 // Subdomains that should NOT be treated as tenant sites.
 const RESERVED_SUBDOMAINS = new Set([
   "www",
+  // ogbharat.openidea.co.in is the ONDC network's own home, not a tenant.
+  "ogbharat",
   "admin",
   "app",
   "api",
